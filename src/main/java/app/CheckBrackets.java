@@ -26,5 +26,6 @@ public class CheckBrackets {
 
     public static void main(String[] args) {
         String str = "(A+B)-458(V-(a/6)/6+7)";
+        System.out.println(checkBrackets(str));
     }
 }
