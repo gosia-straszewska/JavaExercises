@@ -3,12 +3,20 @@ package app;
 import list.StringLinkedList;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PhoneBook {
     static StringLinkedList phoneBook = new StringLinkedList();
 //    static StringArrayList phoneBook = new StringArrayList(1000);
-
+    static Pattern phoneNumberPattern = Pattern.compile("\\d{3}-\\d{3}-\\d{3}");
     static Scanner SCANNER = new Scanner(System.in);
+
+
+    static public boolean isValidPhoneNumber(String number){
+        Matcher phoneNumberMatcher = phoneNumberPattern.matcher(number);
+        return phoneNumberMatcher.matches();
+    };
 
     static public int menu() {
         System.out.println("1. Wyświetl wszystkie");
@@ -39,10 +47,15 @@ public class PhoneBook {
         phoneBook.add("345-654-235");
     }
 
-    public static void addPhoneNumber(){
-        System.out.println("Wpisz nowy numer");
+    public  static  void addPhoneNumber(){
+        System.out.println("Wpisz nowy numer:");
         String item = SCANNER.nextLine();
-        phoneBook.add(item);
+        if (PhoneNumber.isValidPhoneNumber(item)) {
+            phoneBook.add(item);
+            System.out.println("Numer poprawny został dodany");
+        } else {
+            System.out.println("Format numeru niepoprawny. Wpisz w postaci ddd-ddd-ddd!");
+        }
     }
 
     public static void findPhoneNumber(){
